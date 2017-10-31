@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{2A4B2D8E-F3EE-43A3-AFE4-507F355C589C}">
+  DTS:VersionBuild="50"
+  DTS:VersionGUID="{018FF445-FA89-49BE-B4FB-99E40CF3675A}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -21,19 +21,34 @@
       DTS:CreationName="FTP"
       DTS:DTSID="{3B2EA1BD-70DE-415E-9FB4-8BA38104A88F}"
       DTS:ObjectName="FTP Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::server]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerPassword">@[User::password]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerUserName">@[User::username]</DTS:PropertyExpression>
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="ftp.nodarkside.net:21">
+          DTS:ConnectionString=":21">
           <DTS:FtpConnection
-            DTS:ServerName="ftp.nodarkside.net"
-            DTS:ServerUserName="ftp02ulatina@nodarkside.net"
+            DTS:ServerName=""
             DTS:UsePassiveMode="True">
             <DTS:Property
               DTS:Name="ServerPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/J0BhhYhqkykJI37Sd88pAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAwrkFNRRVLjZ+kVsWZNv1qEaKe7xeWBmg+/zqfp555/gAAAAAOgAAAAAIAACAAAABzdvy1DEUKXxhHOSjGZC/2Bwz8fRzxJszE786uSbgTuiAAAADxZQV+sFxc6MCeLS5x6NErIqUJ6Rbrz/c4UV9gLIPaN0AAAADV/IuE1FVYwvNavPNdd8am6Q1+Ey2NPMeVOli8rPRLchfowaDgQ3w9AU++AovxTeAZY5vcbm7SzGkMTMBZ04vQ</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/J0BhhYhqkykJI37Sd88pAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC8iY1cgSpWhQZoWAd2uVh5PNZ0+2lRnM3DmfK/bOgFZwAAAAAOgAAAAAIAACAAAADiiyREx0adC5g3q2CM/9EBbD75gJG7OKyvhp2X0STxIBAAAACgslZr3992g7+/98liZQmUQAAAAGzXCxvmejHmUD1dExG2Nmm6x9KYz3kQ0hme7qUQGOo8ZjY/qdGSEfMq2RpTbIh5ggmqiRHDuLQYqbLtmfAeQZI</DTS:Property>
           </DTS:FtpConnection>
         </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.ProyectoAnalisis]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DDC9394A-A4B3-4B0E-BBDF-3FBDB7BA26E5}"
+      DTS:ObjectName="LocalHost.ProyectoAnalisis">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=ProyectoAnalisis;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -49,12 +64,42 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{84D747C4-4C86-481C-981D-86EB4D9C06D5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="password">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{B8375E90-0418-45F9-9854-C4B1AD12D1E5}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="RemotePathFolder">
       <DTS:VariableValue
         DTS:DataType="8">/Test/*.zip</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BE0132A9-EF98-43B3-8769-B1184B750AF1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="server">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2F9609DE-FECE-4DAE-B091-2B0FE2F69D37}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="username">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:Executables>
@@ -78,6 +123,33 @@
           TaskIsRemotePathVar="True"
           TaskRemotePath="User::RemotePathFolder"
           TaskOverwriteDest="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Server data request"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:DTSID="{5493FF94-691D-46E3-A082-0AE30123DB54}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Server data request"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{DDC9394A-A4B3-4B0E-BBDF-3FBDB7BA26E5}"
+          SQLTask:SqlStatementSource="select username, password, server from Credenciales"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::username" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="1"
+            SQLTask:DtsVariableName="User::password" />
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="2"
+            SQLTask:DtsVariableName="User::server" />
+        </SQLTask:SqlTaskData>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -108,6 +180,14 @@
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\unzip files" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{3BA731C0-F9C0-400C-8302-1FB8F083826D}"
+      DTS:From="Package\Server data request"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\FTP Task" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -120,18 +200,18 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="122,42"
           Id="Package\FTP Task"
-          TopLeft="317,76" />
+          TopLeft="313,130" />
         <NodeLayout
           Size="126,42"
           Id="Package\unzip files"
-          TopLeft="314,162" />
+          TopLeft="310,216" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="377.5,118">
+          TopLeft="373.5,172">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -143,6 +223,32 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Server data request"
+          TopLeft="291,47" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="375.5,89">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
