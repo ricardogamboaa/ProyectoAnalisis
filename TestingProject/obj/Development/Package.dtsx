@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="58"
-  DTS:VersionGUID="{9AFB8E42-1CA8-4532-9AC7-CCA61C4E669F}">
+  DTS:VersionBuild="63"
+  DTS:VersionGUID="{37EE0BB4-74FA-47AB-B84B-574A9938CCF7}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -36,7 +36,7 @@
             <DTS:Property
               DTS:Name="ServerPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/J0BhhYhqkykJI37Sd88pAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADiOJK5OaqnMuveiJixtgI3fmfPI1mpNprdwUx3cY8DMgAAAAAOgAAAAAIAACAAAACpVXHGdeyJ7yFhkkaehVwpfTpH6TZBnNN/YSaw9UH74hAAAAD1KOaJ+SaXId5MeNoljvGqQAAAAPJKOn4nyo2Dd6NsdM/fHd6/WKKH5spZI/TlcqcAvBe9+K4c7+4+/S6nPSCJWE6mDLObn8LQvbDXhxe7cibi9WA</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/J0BhhYhqkykJI37Sd88pAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC9eUHMvxldFaGWaLpeJk/ip4XkxT3BSwX7OJB/GPpMlgAAAAAOgAAAAAIAACAAAACeoxQcgQhurkMe6pXJC6LAWVuvEMf/9NiXZONmFIdtvBAAAACcdICLPJxpvbhEeuvLhv5EQAAAAIsWBmjSX4AVB9s2HWWBPmTHsojS6JYK9F7nkAgRklFyUHhO5qAFuFPrlCficJ5YPdiUaY26yStOIyvAHADwqDo</DTS:Property>
           </DTS:FtpConnection>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
@@ -85,12 +85,40 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{AB4AD802-60CE-4A86-88C4-E46F7DF4C701}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="finCarga">
+      <DTS:VariableValue
+        DTS:DataType="7">11/1/2017 10:12:47 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E72C1F0E-11D8-497F-92E0-F0DF8505A48C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="inicioCarga">
+      <DTS:VariableValue
+        DTS:DataType="7">11/1/2017 10:12:36 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{C109A052-A2E5-46AC-B86A-640F106CBAC0}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="LocalPathFolder">
       <DTS:VariableValue
         DTS:DataType="8">C:\temp</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1A8022FB-66A8-43C7-8BC4-72D1141A2FBA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="nombreArchivo">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -110,6 +138,15 @@
       DTS:ObjectName="RemotePathFolder">
       <DTS:VariableValue
         DTS:DataType="8">/Test/*.zip</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4D7988F1-1075-4BB2-9795-D90A5A1C7BD6}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -193,13 +230,87 @@
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Read files and load to the DB\Data Flow Task"
+          DTS:refId="Package\Read files and load to the DB\final time"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{158FC609-9624-4203-A7FF-A67E492BCA2D}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="final time"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::finCarga]= GETDATE()" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Read files and load to the DB\Get the name of the archive"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{EDA43C9B-0D7F-4F0C-8892-434F94279B36}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get the name of the archive"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::nombreArchivo]  = REPLACE( @[User::TextFilePath] , &quot;C:\\temp\\&quot;, &quot;&quot;)" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Read files and load to the DB\Insert into bitacora"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2E4CE73D-2E83-4045-BE50-2295550B33B5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Insert into bitacora"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{DDC9394A-A4B3-4B0E-BBDF-3FBDB7BA26E5}"
+              SQLTask:SqlStatementSource="insert into Bitacora(nombreArchivo, inicioCarga, finCarga, registrosCargados) values (?,?,?,?)" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::nombreArchivo"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::inicioCarga"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::finCarga"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::RowCount"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="131"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Read files and load to the DB\Read txt files"
           DTS:CreationName="Microsoft.Pipeline"
           DTS:Description="Data Flow Task"
           DTS:DTSID="{347ADF34-509B-4932-814B-4356E8AC69A1}"
           DTS:ExecutableType="Microsoft.Pipeline"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Data Flow Task"
+          DTS:ObjectName="Read txt files"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:ObjectData>
@@ -207,7 +318,7 @@
               version="1">
               <components>
                 <component
-                  refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination"
+                  refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
@@ -264,7 +375,7 @@
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                      refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Connections[OleDbConnection]"
                       connectionManagerID="Package.ConnectionManagers[LocalHost.ProyectoAnalisis]"
                       connectionManagerRefId="Package.ConnectionManagers[LocalHost.ProyectoAnalisis]"
                       description="The OLE DB runtime connection used to access the database."
@@ -272,25 +383,25 @@
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
+                          refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[name]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="50"
                           cachedName="name"
-                          externalMetadataColumnId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
-                          lineageId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Output].Columns[name]" />
+                          externalMetadataColumnId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output].Columns[name]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[name]"
                           codePage="1252"
                           dataType="text"
                           name="name" />
@@ -299,22 +410,22 @@
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -323,7 +434,7 @@
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Read files and load to the DB\Data Flow Task\Read text file"
+                  refId="Package\Read files and load to the DB\Read txt files\Read text file"
                   componentClassID="Microsoft.FlatFileSource"
                   contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
                   description="Flat File Source"
@@ -343,25 +454,25 @@
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Connections[FlatFileConnection]"
+                      refId="Package\Read files and load to the DB\Read txt files\Read text file.Connections[FlatFileConnection]"
                       connectionManagerID="Package.ConnectionManagers[Text file reader]"
                       connectionManagerRefId="Package.ConnectionManagers[Text file reader]"
                       name="FlatFileConnection" />
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Output]"
+                      refId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output]"
                       name="Flat File Source Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Output].Columns[name]"
+                          refId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output].Columns[name]"
                           codePage="1252"
                           dataType="str"
                           errorOrTruncationOperation="Conversion"
                           errorRowDisposition="FailComponent"
-                          externalMetadataColumnId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Output].ExternalColumns[name]"
+                          externalMetadataColumnId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output].ExternalColumns[name]"
                           length="50"
-                          lineageId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Output].Columns[name]"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output].Columns[name]"
                           name="name"
                           truncationRowDisposition="FailComponent">
                           <properties>
@@ -379,7 +490,7 @@
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Output].ExternalColumns[name]"
+                          refId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output].ExternalColumns[name]"
                           codePage="1252"
                           dataType="str"
                           length="50"
@@ -387,27 +498,27 @@
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Error Output]"
+                      refId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Error Output]"
                       isErrorOut="true"
                       name="Flat File Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          refId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           codePage="1252"
                           dataType="text"
                           description="Flat File Source Error Output Column"
-                          lineageId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
                           name="Flat File Source Error Output Column" />
                         <outputColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -415,18 +526,102 @@
                     </output>
                   </outputs>
                 </component>
+                <component
+                  refId="Package\Read files and load to the DB\Read txt files\Row Count"
+                  componentClassID="Microsoft.RowCount"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RowCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Read files and load to the DB\Read txt files\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Read files and load to the DB\Read txt files\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Read files and load to the DB\Read txt files\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
               </components>
               <paths>
                 <path
-                  refId="Package\Read files and load to the DB\Data Flow Task.Paths[Flat File Source Output]"
-                  endId="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Read files and load to the DB\Read txt files.Paths[Flat File Source Output]"
+                  endId="Package\Read files and load to the DB\Read txt files\Row Count.Inputs[Row Count Input 1]"
                   name="Flat File Source Output"
-                  startId="Package\Read files and load to the DB\Data Flow Task\Read text file.Outputs[Flat File Source Output]" />
+                  startId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output]" />
+                <path
+                  refId="Package\Read files and load to the DB\Read txt files.Paths[Row Count Output 1]"
+                  endId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Read files and load to the DB\Read txt files\Row Count.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
         </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Read files and load to the DB\Start time"
+          DTS:CreationName="Microsoft.ExpressionTask"
+          DTS:Description="Expression Task"
+          DTS:DTSID="{35BF54D7-4FF5-486B-B8FC-DFA553BC8197}"
+          DTS:ExecutableType="Microsoft.ExpressionTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Start time"
+          DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExpressionTask
+              Expression="@[User::inicioCarga]= GETDATE()" />
+          </DTS:ObjectData>
+        </DTS:Executable>
       </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read files and load to the DB.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{223D36AC-2F53-47F8-A482-0FE932CE6C09}"
+          DTS:From="Package\Read files and load to the DB\Start time"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Read files and load to the DB\Read txt files" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A71961F0-9DDE-466B-AE75-93A726117752}"
+          DTS:From="Package\Read files and load to the DB\Read txt files"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Read files and load to the DB\final time" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{DEE2AC41-44C3-4A7A-BE53-EB34A7D5FA3A}"
+          DTS:From="Package\Read files and load to the DB\final time"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Read files and load to the DB\Get the name of the archive" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{49EC5281-BE82-41E1-A85F-894C628554CB}"
+          DTS:From="Package\Read files and load to the DB\Get the name of the archive"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Read files and load to the DB\Insert into bitacora" />
+      </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
@@ -519,20 +714,124 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="122,42"
           Id="Package\FTP Task"
           TopLeft="313,130" />
         <NodeLayout
-          Size="151,42"
-          Id="Package\Read files and load to the DB\Data Flow Task"
-          TopLeft="53,22" />
+          Size="140,42"
+          Id="Package\Read files and load to the DB\Read txt files"
+          TopLeft="71,79" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Read files and load to the DB\Start time"
+          TopLeft="71,6.5" />
+        <EdgeLayout
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint]"
+          TopLeft="137.25,48.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5"
+              Start="0,0"
+              End="0,23">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Read files and load to the DB\final time"
+          TopLeft="80,160" />
+        <EdgeLayout
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 1]"
+          TopLeft="141.25,121">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Read files and load to the DB\Get the name of the archive"
+          TopLeft="43,245" />
+        <EdgeLayout
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 2]"
+          TopLeft="145,202">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Read files and load to the DB\Insert into bitacora"
+          TopLeft="64,346" />
+        <EdgeLayout
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 3]"
+          TopLeft="148.5,287">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="266,131"
-          Size="266,174"
+          PanelSize="337,443"
+          Size="337,486"
           Id="Package\Read files and load to the DB"
           TopLeft="235,313" />
         <NodeLayout
@@ -589,18 +888,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="370.5,258">
+          TopLeft="373,258">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,55"
+              EndConnector="30.5,55"
               Start="0,0"
-              End="0,47.5">
+              End="30.5,47.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,47.5" />
+                    End="0,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.5"
+                    Point2="0,27.5"
+                    Point3="4,27.5" />
+                  <mssgle:LineSegment
+                    End="26.5,27.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26.5,27.5"
+                    Point2="30.5,27.5"
+                    Point3="30.5,31.5" />
+                  <mssgle:LineSegment
+                    End="30.5,47.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -613,32 +924,58 @@
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Read files and load to the DB\Data Flow Task">
+    design-time-name="Package\Read files and load to the DB\Read txt files">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="171,42"
-          Id="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination"
-          TopLeft="298,183" />
+          Id="Package\Read files and load to the DB\Read txt files\OLE DB Destination"
+          TopLeft="299,208" />
         <NodeLayout
           Size="141,42"
-          Id="Package\Read files and load to the DB\Data Flow Task\Read text file"
+          Id="Package\Read files and load to the DB\Read txt files\Read text file"
           TopLeft="314,34" />
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Read files and load to the DB\Read txt files\Row Count"
+          TopLeft="317,117" />
         <EdgeLayout
-          Id="Package\Read files and load to the DB\Data Flow Task.Paths[Flat File Source Output]"
-          TopLeft="384,76">
+          Id="Package\Read files and load to the DB\Read txt files.Paths[Flat File Source Output]"
+          TopLeft="383.25,76">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,107"
+              EndConnector="0,41"
               Start="0,0"
-              End="0,99.5">
+              End="0,33.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,99.5" />
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read files and load to the DB\Read txt files.Paths[Row Count Output 1]"
+          TopLeft="383.25,159">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -651,7 +988,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Read files and load to the DB\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Read files and load to the DB\Read txt files\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
