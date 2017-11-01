@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="63"
-  DTS:VersionGUID="{37EE0BB4-74FA-47AB-B84B-574A9938CCF7}">
+  DTS:VersionBuild="78"
+  DTS:VersionGUID="{EF389EBA-AD68-4F2F-B8A4-C65C34C939BA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -36,7 +36,7 @@
             <DTS:Property
               DTS:Name="ServerPassword"
               Sensitive="1"
-              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/J0BhhYhqkykJI37Sd88pAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABNcKQrwzebO67GTKqGxM+R1z5SqMuD1EmKRU2snNb/GwAAAAAOgAAAAAIAACAAAACUs1BP6551d7QVSRTLtPlSD+fwYT8JEY3u3GhHfI90MxAAAADnfA+WCeat4NaGj+Y8xnRyQAAAAOdmhwZ40LOlyKVyC4shc0qpUXJyhDheObeza8v/eTL4w9OAhCrdcenzB5AHZ+i7UXElDot0fxAJ7b3P0rrSAWE</DTS:Property>
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/J0BhhYhqkykJI37Sd88pAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAJN0Uh1bosSsmzf7NUDndYszVVfD4ElsLVqCcgg0nt7gAAAAAOgAAAAAIAACAAAACnFDAdSvnWMTemhXZab383ZMtx82Em5JMXtS/bN+gzDxAAAACGSsCNy1WzvxDyTHFUICP7QAAAAK2doRgQstgINC1SJ4XONvmyGm4dy0gW+af2JQLTiGzfk07A34Qqr7hjCpb6wWm5xNaLL6sxNOsd8rQTf2dMlGQ</DTS:Property>
           </DTS:FtpConnection>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
@@ -150,6 +150,15 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{065EE7A1-7AAC-4BB2-B0A0-003281FD48A7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsOfTheTextFile">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{BE0132A9-EF98-43B3-8769-B1184B750AF1}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
@@ -229,6 +238,34 @@
       </DTS:ForEachEnumerator>
       <DTS:Variables />
       <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Read files and load to the DB\Count the rows of the file"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{DC54FA9B-B8C6-4392-AF71-4DF60F632361}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Count the rows of the file"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{DDC9394A-A4B3-4B0E-BBDF-3FBDB7BA26E5}"
+              SQLTask:SqlStatementSource="select count(1) from Bitacora where nombreArchivo = ? and registrosCargados &gt; 0;"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="0"
+                SQLTask:DtsVariableName="User::RowCount" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::nombreArchivo"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
         <DTS:Executable
           DTS:refId="Package\Read files and load to the DB\final time"
           DTS:CreationName="Microsoft.ExpressionTask"
@@ -317,6 +354,137 @@
             <pipeline
               version="1">
               <components>
+                <component
+                  refId="Package\Read files and load to the DB\Read txt files\Conditional Split"
+                  componentClassID="Microsoft.ConditionalSplit"
+                  contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+                  name="Conditional Split"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Read files and load to the DB\Read txt files\Conditional Split.Inputs[Conditional Split Input]"
+                      description="Input to the Conditional Split Transformation"
+                      name="Conditional Split Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[The file doesn't has rows added at the DB]"
+                      description="Output 1 of the Conditional Split Transformation"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      exclusionGroup="1"
+                      name="The file doesn't has rows added at the DB"
+                      synchronousInputId="Package\Read files and load to the DB\Read txt files\Conditional Split.Inputs[Conditional Split Input]"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                          name="Expression">@[User::RowCount] &lt; 1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Specifies the friendly version of the expression. This expression version uses column names."
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::RowCount] &lt; 1</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                          name="EvaluationOrder">0</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[Conditional Split Default Output]"
+                      description="Default Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      name="Conditional Split Default Output"
+                      synchronousInputId="Package\Read files and load to the DB\Read txt files\Conditional Split.Inputs[Conditional Split Input]">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          name="IsDefaultOut">true</property>
+                      </properties>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[Conditional Split Error Output]"
+                      description="Error Output of the Conditional Split Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Conditional Split Error Output"
+                      synchronousInputId="Package\Read files and load to the DB\Read txt files\Conditional Split.Inputs[Conditional Split Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Read files and load to the DB\Read txt files\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Read files and load to the DB\Read txt files\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Read files and load to the DB\Read txt files\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Read files and load to the DB\Read txt files\Derived Column.Inputs[Derived Column Input]">
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Read files and load to the DB\Read txt files\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Read files and load to the DB\Read txt files\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Read files and load to the DB\Read txt files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Read files and load to the DB\Read txt files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Read files and load to the DB\Read txt files\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
                 <component
                   refId="Package\Read files and load to the DB\Read txt files\OLE DB Destination"
                   componentClassID="Microsoft.OLEDBDestination"
@@ -558,8 +726,13 @@
               </components>
               <paths>
                 <path
+                  refId="Package\Read files and load to the DB\Read txt files.Paths[Conditional Split Default Output]"
+                  endId="Package\Read files and load to the DB\Read txt files\Derived Column.Inputs[Derived Column Input]"
+                  name="Conditional Split Default Output"
+                  startId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[Conditional Split Default Output]" />
+                <path
                   refId="Package\Read files and load to the DB\Read txt files.Paths[Flat File Source Output]"
-                  endId="Package\Read files and load to the DB\Read txt files\Row Count.Inputs[Row Count Input 1]"
+                  endId="Package\Read files and load to the DB\Read txt files\Conditional Split.Inputs[Conditional Split Input]"
                   name="Flat File Source Output"
                   startId="Package\Read files and load to the DB\Read txt files\Read text file.Outputs[Flat File Source Output]" />
                 <path
@@ -567,6 +740,11 @@
                   endId="Package\Read files and load to the DB\Read txt files\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
                   startId="Package\Read files and load to the DB\Read txt files\Row Count.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Read files and load to the DB\Read txt files.Paths[The file doesn't has rows added at the DB]"
+                  endId="Package\Read files and load to the DB\Read txt files\Row Count.Inputs[Row Count Input 1]"
+                  name="The file doesn't has rows added at the DB"
+                  startId="Package\Read files and load to the DB\Read txt files\Conditional Split.Outputs[The file doesn't has rows added at the DB]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -608,19 +786,27 @@
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
-          DTS:DTSID="{DEE2AC41-44C3-4A7A-BE53-EB34A7D5FA3A}"
+          DTS:DTSID="{0166FF53-E4B5-42DB-803D-968EADD93D62}"
           DTS:From="Package\Read files and load to the DB\final time"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
-          DTS:To="Package\Read files and load to the DB\Get the name of the archive" />
+          DTS:To="Package\Read files and load to the DB\Insert into bitacora" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
-          DTS:DTSID="{49EC5281-BE82-41E1-A85F-894C628554CB}"
+          DTS:DTSID="{BE63A89C-C3F3-417D-AD2A-FC67D704174A}"
           DTS:From="Package\Read files and load to the DB\Get the name of the archive"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
-          DTS:To="Package\Read files and load to the DB\Insert into bitacora" />
+          DTS:To="Package\Read files and load to the DB\Count the rows of the file" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{864A89C1-E5F8-4B73-9CF2-1ECECD1B2095}"
+          DTS:From="Package\Read files and load to the DB\Count the rows of the file"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Read files and load to the DB\Start time" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -714,85 +900,89 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="122,42"
           Id="Package\FTP Task"
-          TopLeft="313,130" />
-        <NodeLayout
-          Size="140,42"
-          Id="Package\Read files and load to the DB\Read txt files"
-          TopLeft="71,79" />
-        <NodeLayout
-          Size="125,42"
-          Id="Package\Read files and load to the DB\Start time"
-          TopLeft="71,6.5" />
-        <EdgeLayout
-          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint]"
-          TopLeft="137.25,48.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,30.5"
-              Start="0,0"
-              End="0,23">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="346,138" />
         <NodeLayout
           Size="123,42"
           Id="Package\Read files and load to the DB\final time"
-          TopLeft="80,160" />
-        <EdgeLayout
-          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 1]"
-          TopLeft="141.25,121">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39"
-              Start="0,0"
-              End="0,31.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="80,315" />
         <NodeLayout
           Size="211,42"
           Id="Package\Read files and load to the DB\Get the name of the archive"
-          TopLeft="43,245" />
+          TopLeft="51,19" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Read files and load to the DB\Insert into bitacora"
+          TopLeft="63,386" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Read files and load to the DB\Read txt files"
+          TopLeft="79,235" />
+        <NodeLayout
+          Size="125,42"
+          Id="Package\Read files and load to the DB\Start time"
+          TopLeft="94,161.5" />
         <EdgeLayout
-          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 2]"
-          TopLeft="145,202">
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint]"
+          TopLeft="152.75,203.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43"
+              EndConnector="0,31.5"
               Start="0,0"
-              End="0,35.5">
+              End="0,24">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.5" />
+                    End="0,24" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 1]"
+          TopLeft="145.25,277">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 2]"
+          TopLeft="144.5,357">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -802,23 +992,45 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="169,42"
-          Id="Package\Read files and load to the DB\Insert into bitacora"
-          TopLeft="64,346" />
+          Size="199,42"
+          Id="Package\Read files and load to the DB\Count the rows of the file"
+          TopLeft="59,87" />
         <EdgeLayout
           Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 3]"
-          TopLeft="148.5,287">
+          TopLeft="157.5,61">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,59"
+              EndConnector="0,26"
               Start="0,0"
-              End="0,51.5">
+              End="0,18.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,51.5" />
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read files and load to the DB.PrecedenceConstraints[Constraint 4]"
+          TopLeft="157.5,129">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.5"
+              Start="0,0"
+              End="0,25">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -830,21 +1042,21 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="337,443"
-          Size="337,486"
+          PanelSize="337,483"
+          Size="337,526"
           Id="Package\Read files and load to the DB"
-          TopLeft="235,313" />
+          TopLeft="236,312" />
         <NodeLayout
           Size="172,42"
           Id="Package\Server data request"
-          TopLeft="291,47" />
+          TopLeft="324,55" />
         <NodeLayout
           Size="126,42"
           Id="Package\unzip files"
-          TopLeft="310,216" />
+          TopLeft="343,224" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="373.5,172">
+          TopLeft="406.5,180">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -866,7 +1078,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="375.5,89">
+          TopLeft="408.5,97">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -888,30 +1100,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="373,258">
+          TopLeft="405.25,266">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="30.5,55"
+              EndConnector="0,46"
               Start="0,0"
-              End="30.5,47.5">
+              End="0,38.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.5"
-                    Point2="0,27.5"
-                    Point3="4,27.5" />
-                  <mssgle:LineSegment
-                    End="26.5,27.5" />
-                  <mssgle:CubicBezierSegment
-                    Point1="26.5,27.5"
-                    Point2="30.5,27.5"
-                    Point3="30.5,31.5" />
-                  <mssgle:LineSegment
-                    End="30.5,47.5" />
+                    End="0,38.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -927,44 +1127,22 @@
     design-time-name="Package\Read files and load to the DB\Read txt files">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Read files and load to the DB\Read txt files\OLE DB Destination"
-          TopLeft="299,208" />
-        <NodeLayout
-          Size="141,42"
-          Id="Package\Read files and load to the DB\Read txt files\Read text file"
-          TopLeft="314,34" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="130,42"
           Id="Package\Read files and load to the DB\Read txt files\Row Count"
-          TopLeft="317,117" />
-        <EdgeLayout
-          Id="Package\Read files and load to the DB\Read txt files.Paths[Flat File Source Output]"
-          TopLeft="383.25,76">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41"
-              Start="0,0"
-              End="0,33.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,33.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          TopLeft="461,241" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Read files and load to the DB\Read txt files\OLE DB Destination"
+          TopLeft="443,332" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Read files and load to the DB\Read txt files\Read text file"
+          TopLeft="315,58" />
         <EdgeLayout
           Id="Package\Read files and load to the DB\Read txt files.Paths[Row Count Output 1]"
-          TopLeft="383.25,159">
+          TopLeft="527.25,283">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -982,6 +1160,108 @@
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Read files and load to the DB\Read txt files\Conditional Split"
+          TopLeft="305,149" />
+        <EdgeLayout
+          Id="Package\Read files and load to the DB\Read txt files.Paths[Flat File Source Output]"
+          TopLeft="384,100">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Read files and load to the DB\Read txt files.Paths[The file doesn't has rows added at the DB]"
+          TopLeft="407,191">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="119,50"
+              Start="0,0"
+              End="119,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.3065134099617" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.3065134099617"
+                    Point2="0,20.3065134099617"
+                    Point3="4,20.3065134099617" />
+                  <mssgle:LineSegment
+                    End="115,20.3065134099617" />
+                  <mssgle:CubicBezierSegment
+                    Point1="115,20.3065134099617"
+                    Point2="119,20.3065134099617"
+                    Point3="119,24.3065134099617" />
+                  <mssgle:LineSegment
+                    End="119,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-33.9869140625,25.3065134099617,186.973828125,9.7978515625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Read files and load to the DB\Read txt files\Derived Column"
+          TopLeft="142,245" />
+        <EdgeLayout
+          Id="Package\Read files and load to the DB\Read txt files.Paths[Conditional Split Default Output]"
+          TopLeft="358,191">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-139,54"
+              Start="0,0"
+              End="-139,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.9310344827586" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.9310344827586"
+                    Point2="0,21.9310344827586"
+                    Point3="-4,21.9310344827586" />
+                  <mssgle:LineSegment
+                    End="-135,21.9310344827586" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-135,21.9310344827586"
+                    Point2="-139,21.9310344827586"
+                    Point3="-139,25.9310344827586" />
+                  <mssgle:LineSegment
+                    End="-139,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-140.11390625,26.9310344827586,141.2278125,11.658203125"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
