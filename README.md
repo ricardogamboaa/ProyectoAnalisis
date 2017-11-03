@@ -1,0 +1,5 @@
+# ProyectoAnalisis
+
+.bak:
+
+package:
